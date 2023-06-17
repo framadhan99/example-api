@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -30,5 +31,10 @@ class AuthenticationController extends Controller
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
+    }
+
+    public function me(Request $request)
+    {
+        return response()->json(Auth::user());
     }
 }
